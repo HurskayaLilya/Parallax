@@ -1,0 +1,116 @@
+@import "variables";
+@import "fonts";
+@import "reset";
+.ibg{
+    background-position: center;
+    padding: 0 0 50% 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+.ibg img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    }
+    /*-----------------------------------*/
+//Адаптивна властивість
+@mixin adaptive-value($property, $startSize, $minSize, $type) {
+    $addSize: $startSize - $minSize;
+    @if $type==1 {
+       //Тільки якщо менше контейнера
+       #{$property}: $startSize + px;
+       @media (max-width: #{$maxWidthContainer + px}) {
+          #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+       }
+    } @else if $type==2 {
+       //Тільки якщо більше контейнера
+       #{$property}: $startSize + px;
+       @media (min-width: #{$maxWidthContainer + px}) {
+          #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+       }
+ 
+    } @else {
+       //Завжди
+       #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+ }
+ /*========================================================================*/
+
+/*  .text{
+    @include adaptive-value("font-size",50 ,20 ,1 );
+} */
+
+ /*========================================================================*/ 
+ .page{
+   position:absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+ }
+ .parallax{
+   position: relative;
+   height: 100%;
+   &__fog{
+      background: url('@img/fog_1.png') bottom / 100% no-repeat;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
+
+   }
+ }
+ .parallax__montain{
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   &_1{
+      background: url('@img/m_1.png') 0 0 / cover no-repeat; 
+   }
+   &_2{
+      background: url('@img/m_2.png') bottom right / 45% no-repeat; 
+      z-index: 1;
+   }
+   &_3{
+      background: url('@img/m_3.png') left bottom / 100% no-repeat; 
+      z-index: 1;
+   }
+ }
+ /*========================================================================*/
+ .content{
+   position: relative;
+   &__body{
+      max-width: 1170px;
+      margin: 0 auto;
+   }
+   &__header{
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding: 0 20px;
+   }
+   &__title{
+      font-size: 200px;
+   }
+   &__subtitle{
+      font-size: 120px;
+   }
+   &__article{
+      background-color: rgba(255, 217, 0, 0.452);
+      padding: 25px;
+      font-size: 18px;
+      line-height: 24px;
+      p{
+         margin-bottom: 20px;
+      }
+   }
+ }
